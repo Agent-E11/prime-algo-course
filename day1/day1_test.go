@@ -29,3 +29,29 @@ func TestBinarySearch(t *testing.T) {
 		t.Fatalf("expected to not find 20 in list")
 	}
 }
+
+func TestTwoCrystalBalls(t *testing.T) {
+	i0 := day1.TwoCrystalBalls(
+		[]bool{false, false, false, false, false, false, false, false, true},
+	)
+
+	if i0 != 8 {
+		t.Fatalf("expected i0 to be 8")
+	}
+
+	i1 := day1.TwoCrystalBalls(
+		[]bool{false, false, false, false, false, true, true, true, true},
+	)
+
+	if i1 != 5 {
+		t.Fatalf("expected i0 to be 5")
+	}
+
+	i2 := day1.TwoCrystalBalls(
+		[]bool{false, false, false, false, false, false, false, false, false},
+	)
+
+	if i2 != -1 {
+		t.Fatalf("expected i0 to be -1 (not found)")
+	}
+}
