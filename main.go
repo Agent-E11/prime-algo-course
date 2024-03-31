@@ -2,14 +2,10 @@ package main
 
 import (
 	"github.com/agent-e11/prime-algo-course/day1"
-	"fmt"
 )
 
 func main() {
-	b0 := []bool{false, false, false, false, false, false, false, false, false}
+	arr := []int{777, 7, 77, 99, 999, 3, 33, 9, 333}
 
-	i := day1.TwoCrystalBalls(b0)
-
-
-	fmt.Println("First break:", i)
+	day1.BubbleSort(&arr)
 }

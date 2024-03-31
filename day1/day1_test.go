@@ -1,6 +1,7 @@
 package day1_test
 
 import (
+	"slices"
 	"testing"
 
 	"github.com/agent-e11/prime-algo-course/day1"
@@ -53,5 +54,23 @@ func TestTwoCrystalBalls(t *testing.T) {
 
 	if i2 != -1 {
 		t.Fatalf("expected i0 to be -1 (not found)")
+	}
+}
+
+func TestBubbleSort(t *testing.T) {
+	arr0 := []int{2, 10, 1, 6, 7, 5, 8, 3, 4, 9}
+	expect0 := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	day1.BubbleSort(&arr0)
+
+	if !slices.Equal(arr0, expect0) {
+		t.Fatalf("expected sorted array `%v`, got `%v`", expect0, arr0)
+	}
+
+	arr1 := []int{1, 2, 3, 4, 5, 6, 7}
+	expect1 := []int{1, 2, 3, 4, 5, 6, 7}
+	day1.BubbleSort(&arr1)
+
+	if !slices.Equal(arr0, expect0) {
+		t.Fatalf("expected sorted array `%v`, got `%v`", expect1, arr1)
 	}
 }
