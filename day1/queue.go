@@ -1,14 +1,14 @@
 package day1
 
-type Node[T any] struct {
+type QNode[T any] struct {
 	value T
-	next *Node[T]
+	next *QNode[T]
 }
 
 type Queue[T any] struct {
 	Length int
-	head *Node[T]
-	tail *Node[T]
+	head *QNode[T]
+	tail *QNode[T]
 }
 
 // Create a new empty Queue
@@ -24,7 +24,7 @@ func NewQueue[T any]() Queue[T] {
 func (q *Queue[T]) Enqueue(item T) {
 	q.Length++
 
-	node := &Node[T]{
+	node := &QNode[T]{
 		value: item,
 		next: nil,
 	}
