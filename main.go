@@ -1,11 +1,29 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/agent-e11/prime-algo-course/day1"
 )
 
 func main() {
-	arr := []int{777, 7, 77, 99, 999, 3, 33, 9, 333}
+	q := day1.NewQueue[int]()
 
-	day1.BubbleSort(&arr)
+	v, ok := q.Peek()
+
+	fmt.Println("value, ok:", v, ok)
+
+	for i := range 10 {
+		fmt.Println("Adding", i)
+		q.Enqueue(i)
+	}
+
+	for {
+		v, ok := q.Deque()
+		if !ok {
+			break
+		}
+		fmt.Println("Next item:", v)
+	}
+	fmt.Println("Done")
 }
