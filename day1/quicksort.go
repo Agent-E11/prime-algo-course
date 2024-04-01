@@ -37,5 +37,4 @@ func partition(arr *[]int, lo int, hi int) int {
 // Sort an array in-place using the quicksort method
 func Quicksort(arr *[]int) {
 	qs(arr, 0, len(*arr)-1)
-
 }
