@@ -7,31 +7,22 @@ import (
 )
 
 func main() {
-	s := day1.NewStack[int]()
-
-	v, ok := s.Peek()
-
-	fmt.Println("value, ok:", v, ok)
-
-	for i := range 5 {
-		fmt.Println("Adding", i)
-		s.Push(i)
+	maze := []string{
+		"XXXXXXXXXX$X",
+		"X        X X",
+		"X        X X",
+		"X XXXXXXXX X",
+		"X          X",
+		"X^XXXXXXXXXX",
+	}
+	start := day1.Point{
+		Y: 5,
+		X: 1,
+	}
+	end := day1.Point{
+		Y: 0,
+		X: 10,
 	}
 
-	i := 0
-	for {
-		if i % 3 == 0 || i % 5 == 0 {
-			fmt.Printf("(%d)(%d) Adding\n", i, s.Length)
-			s.Push(i)
-		} else {
-			v, ok := s.Pop()
-			if !ok {
-				break
-			}
-			fmt.Printf("(%d)(%d) Next item: %d\n", i, s.Length, v)
-		}
-
-		i++
-	}
-	fmt.Println("Done")
+	fmt.Println("Path:", day1.Solve(maze, "X", start, end))
 }
