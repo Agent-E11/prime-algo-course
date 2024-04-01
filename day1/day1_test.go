@@ -70,7 +70,41 @@ func TestBubbleSort(t *testing.T) {
 	expect1 := []int{1, 2, 3, 4, 5, 6, 7}
 	day1.BubbleSort(&arr1)
 
-	if !slices.Equal(arr0, expect0) {
+	if !slices.Equal(arr1, expect1) {
 		t.Fatalf("expected sorted array `%v`, got `%v`", expect1, arr1)
+	}
+
+	arr2 := []int{7, 6, 5, 4, 3, 2, 1}
+	expect2 := []int{1, 2, 3, 4, 5, 6, 7}
+	day1.BubbleSort(&arr2)
+
+	if !slices.Equal(arr2, expect2) {
+		t.Fatalf("expected sorted array `%v`, got `%v`", expect2, arr2)
+	}
+}
+
+func TestQuickSort(t *testing.T) {
+	arr0 := []int{2, 10, 1, 6, 7, 5, 8, 3, 4, 9}
+	expect0 := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	day1.Quicksort(&arr0)
+
+	if !slices.Equal(arr0, expect0) {
+		t.Fatalf("expected sorted array `%v`, got `%v`", expect0, arr0)
+	}
+
+	arr1 := []int{1, 2, 3, 4, 5, 6, 7}
+	expect1 := []int{1, 2, 3, 4, 5, 6, 7}
+	day1.Quicksort(&arr1)
+
+	if !slices.Equal(arr1, expect1) {
+		t.Fatalf("expected sorted array `%v`, got `%v`", expect1, arr1)
+	}
+
+	arr2 := []int{7, 6, 5, 4, 3, 2, 1}
+	expect2 := []int{1, 2, 3, 4, 5, 6, 7}
+	day1.Quicksort(&arr2)
+
+	if !slices.Equal(arr2, expect2) {
+		t.Fatalf("expected sorted array `%v`, got `%v`", expect2, arr2)
 	}
 }
