@@ -19,8 +19,51 @@ func NewStack[T any]() Stack[T] {
 
 // TODO:
 
-// Push
+func (s *Stack[T]) Push(item T) {
+	s.Length++
 
-// Pop
+	node := &SNode[T]{
+		value: item,
+		prev: s.head,
+	}
 
-// Peek
+	s.head = node
+}
+
+func (s *Stack[T]) Pop() (value T, ok bool) {
+	
+	if s.head == nil {
+		ok = false
+		return
+	}
+
+	s.Length--
+
+	if s.Length == 0 {
+		head := s.head
+		s.head = nil
+
+		value = head.value
+		ok = true
+		return
+	}
+
+	head := s.head
+
+	s.head = s.head.prev
+
+	value = head.value
+	ok = true
+	return
+}
+
+func (s *Stack[T]) Peek() (value T, ok bool) {
+	if s.head == nil {
+		ok = false
+		return
+	}
+
+	value = s.head.value
+	ok = true
+	return
+}
