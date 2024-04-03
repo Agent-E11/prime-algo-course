@@ -2,24 +2,25 @@ package day1
 
 import (
 	"errors"
+	"fmt"
 )
 
 var OutOfBoundsErr error = errors.New("Index out of bounds")
 
-type LNode[T any] struct {
+type LNode[T comparable] struct {
 	value T
 	prev  *LNode[T]
 	next  *LNode[T]
 }
 
-type LinkedList[T any] struct {
+type LinkedList[T comparable] struct {
 	Length int
 	head   *LNode[T]
 	tail   *LNode[T]
 }
 
 // Create an empty LinkedList with the specified type
-func NewLinkedList[T any]() LinkedList[T] {
+func NewLinkedList[T comparable]() LinkedList[T] {
 	return LinkedList[T]{
 		Length: 0,
 		head:   nil,
@@ -65,7 +66,7 @@ func (l *LinkedList[T]) Append(item T) {
 
 	// If the list is empty,
 	// set the head and tail to the new node and return
-	if l.Length == 0 {
+	if l.Length == 1 {
 		l.head = node
 		l.tail = node
 		return
@@ -120,13 +121,123 @@ func (l *LinkedList[T]) InsertAt(item T, idx int) error {
 }
 
 func (l *LinkedList[T]) Remove(item T) (value T, ok bool) {
+	currNode := l.head
+
+	// Loop over the entire list
+	for i := 0; currNode != nil && i < l.Length; i++ {
+		if currNode.value == item {
+			break
+		}
+
+		currNode = currNode.next
+	}
+
+	// Did not find the element
+	if currNode == nil {
+		ok = false
+		return
+	}
+
+	l.Length--
+
+	value, ok = l.removeNode(currNode)
+
 	return
 }
 
 func (l *LinkedList[T]) RemoveAt(idx int) (value T, ok bool) {
+	node := l.getAt(idx)
+
+	if node == nil {
+		ok = false
+		return
+	}
+
+	value, ok = l.removeNode(node)
+
 	return
 }
 
 func (l *LinkedList[T]) Get(idx int) (value T, ok bool) {
+	node := l.getAt(idx)
+	if node == nil {
+		ok = false
+		return
+	}
+	value = node.value
+	ok = true
 	return
+}
+
+func (l *LinkedList[T]) Println() {
+	currNode := l.head
+
+	fmt.Print("[ ")
+	for currNode != nil {
+		fmt.Printf("%v, ", currNode.value)
+		currNode = currNode.next
+	}
+	fmt.Print("]\n")
+}
+
+func (l *LinkedList[T]) Debug() {
+	currNode := l.head
+	idx := 0
+	fmt.Println("[")
+	for currNode != nil {
+		fmt.Printf("  %v: { (%p)\n", idx, &currNode)
+		fmt.Printf("    v: %v\n", currNode.value)
+		fmt.Printf("    p: %p %v\n", currNode.prev, currNode.prev)
+		fmt.Printf("    n: %p %v\n", currNode.next, currNode.prev)
+		fmt.Print ("  },\n")
+
+		currNode = currNode.next
+		idx++
+	}
+	fmt.Println("]")
+}
+
+func (l *LinkedList[T]) removeNode(node *LNode[T]) (value T, ok bool) {
+	l.Length--
+
+	if l.Length == 0 {
+		value = l.head.value
+		ok = true
+		l.head, l.tail = nil, nil
+		return
+	}
+
+	if node.next != nil {
+		node.next.prev = node.prev
+	}
+	if node.prev != nil {
+		node.prev.next = node.next
+	}
+
+	if node == l.head {
+		l.head = node.next
+	}
+	if node == l.tail {
+		l.tail = node.prev
+	}
+
+	node.next, node.prev = nil, nil
+
+	value = node.value
+	ok = true
+
+	return
+}
+
+func (l *LinkedList[T]) getAt(idx int) *LNode[T] {
+	if idx >= l.Length || idx < 0 {
+		return nil
+	}
+
+	currNode := l.head
+	for range idx {
+		currNode = currNode.next
+	}
+
+	return currNode
 }
