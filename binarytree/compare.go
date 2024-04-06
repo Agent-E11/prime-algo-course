@@ -1,4 +1,4 @@
-package day1
+package binarytree
 
 func CompareBinaryTrees[T comparable](a *BinaryNode[T], b *BinaryNode[T]) bool {
 

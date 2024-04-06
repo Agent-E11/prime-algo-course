@@ -1,4 +1,4 @@
-package day1
+package binarytree
 
 func PostOrderSearch(head BinaryNode[int]) []int {
 	return *postWalkBinaryTree(&head, &[]int{})

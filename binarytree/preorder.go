@@ -1,12 +1,5 @@
 // Binary Tree
-package day1
-
-type BinaryNode[T comparable] struct {
-	Value T
-	Parent *BinaryNode[T]
-	Left *BinaryNode[T]
-	Right *BinaryNode[T]
-}
+package binarytree
 
 func PreOrderSearch(head BinaryNode[int]) []int {
 	return *preWalkBinaryTree(&head, &[]int{})

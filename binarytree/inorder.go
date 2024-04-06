@@ -1,4 +1,4 @@
-package day1
+package binarytree
 
 func InOrderSearch(head BinaryNode[int]) []int {
 	return *inWalkBinaryTree(&head, &[]int{})

@@ -1,4 +1,4 @@
-package day1
+package binarytree
 
 func BreadthFirstSearch(head *BinaryNode[int], needle int) bool {
 	q := []*BinaryNode[int]{head}
