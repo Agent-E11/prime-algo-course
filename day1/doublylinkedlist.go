@@ -138,8 +138,6 @@ func (l *LinkedList[T]) Remove(item T) (value T, ok bool) {
 		return
 	}
 
-	l.Length--
-
 	value, ok = l.removeNode(currNode)
 
 	return
@@ -183,12 +181,13 @@ func (l *LinkedList[T]) Println() {
 func (l *LinkedList[T]) Debug() {
 	currNode := l.head
 	idx := 0
+	fmt.Println("Linked List, length", l.Length)
 	fmt.Println("[")
 	for currNode != nil {
-		fmt.Printf("  %v: { (%p)\n", idx, &currNode)
+		fmt.Printf("  %v: { (%p)\n", idx, currNode)
 		fmt.Printf("    v: %v\n", currNode.value)
 		fmt.Printf("    p: %p %v\n", currNode.prev, currNode.prev)
-		fmt.Printf("    n: %p %v\n", currNode.next, currNode.prev)
+		fmt.Printf("    n: %p %v\n", currNode.next, currNode.next)
 		fmt.Print ("  },\n")
 
 		currNode = currNode.next

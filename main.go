@@ -58,7 +58,9 @@ func main() {
 		//time.Sleep(2 * time.Second)
 
 		fmt.Print("Continue... ")
-		reader.ReadLine()
+		if s, _ := reader.ReadString('\n'); s == "q\n" {
+			break
+		}
 	}
 
 
