@@ -37,7 +37,9 @@ func main() {
 		},
 	}
 
-	fmt.Printf("day1.PreOrderSearch(n): %v\n", day1.PreOrderSearch(n))
-	fmt.Printf("day1.InOrderSearch(n): %v\n", day1.InOrderSearch(n))
-	fmt.Printf("day1.PostOrderSearch(n): %v\n", day1.PostOrderSearch(n))
+	fmt.Printf("day1.BreadthFirstSearch(&n, 1): %v\n", day1.BreadthFirstSearch(&n, 1))
+	fmt.Printf("day1.BreadthFirstSearch(&n, 3): %v\n", day1.BreadthFirstSearch(&n, 3))
+	fmt.Printf("day1.BreadthFirstSearch(&n, 4): %v\n", day1.BreadthFirstSearch(&n, 4))
+	fmt.Printf("day1.BreadthFirstSearch(&n, 6): %v\n", day1.BreadthFirstSearch(&n, 6))
+	fmt.Printf("day1.BreadthFirstSearch(&n, 9): %v\n", day1.BreadthFirstSearch(&n, 9))
 }
