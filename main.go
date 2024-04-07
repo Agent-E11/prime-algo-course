@@ -1,7 +1,9 @@
 package main
 
 import (
-//	"fmt"
+	//	"fmt"
+
+	"fmt"
 
 	"github.com/agent-e11/prime-algo-course/binarytree"
 )
@@ -47,9 +49,6 @@ func main() {
 
 	n.Print()
 
-//	fmt.Printf("binarytree.BreadthFirstSearch(&n, 1): %v\n", binarytree.BreadthFirstSearch(&n, 1))
-//	fmt.Printf("binarytree.BreadthFirstSearch(&n, 3): %v\n", binarytree.BreadthFirstSearch(&n, 3))
-//	fmt.Printf("binarytree.BreadthFirstSearch(&n, 4): %v\n", binarytree.BreadthFirstSearch(&n, 4))
-//	fmt.Printf("binarytree.BreadthFirstSearch(&n, 6): %v\n", binarytree.BreadthFirstSearch(&n, 6))
-//	fmt.Printf("binarytree.BreadthFirstSearch(&n, 9): %v\n", binarytree.BreadthFirstSearch(&n, 9))
+	fmt.Println(n.IsBinarySearchTree())
+	fmt.Println(n.InOrderSearch())
 }

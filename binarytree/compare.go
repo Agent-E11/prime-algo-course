@@ -1,6 +1,8 @@
 package binarytree
 
-func CompareBinaryTrees[T comparable](a *BinaryNode[T], b *BinaryNode[T]) bool {
+import "cmp"
+
+func CompareBinaryTrees[T cmp.Ordered](a *BinaryNode[T], b *BinaryNode[T]) bool {
 
 	if a == nil && b == nil {
 		return true

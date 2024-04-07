@@ -1,8 +1,11 @@
 package binarytree
 
-import "fmt"
+import (
+	"cmp"
+	"fmt"
+)
 
-type BinaryNode[T comparable] struct {
+type BinaryNode[T cmp.Ordered] struct {
 	Value T
 	Parent *BinaryNode[T]
 	Left *BinaryNode[T]

@@ -1,17 +1,21 @@
 package binarytree
 
-func InOrderSearch(head BinaryNode[int]) []int {
-	return *inWalkBinaryTree(&head, &[]int{})
+func (t *BinaryNode[T]) InOrderSearch() []T {
+	return *t.inWalkBinaryTree(&[]T{})
 }
 
-func inWalkBinaryTree(curr *BinaryNode[int], path *[]int) *[]int {
-	if curr == nil {
+func (t *BinaryNode[T]) inWalkBinaryTree(path *[]T) *[]T {
+	if t == nil {
 		return path
 	}
 
-	inWalkBinaryTree(curr.Left, path)
-	*path = append(*path, curr.Value)
-	inWalkBinaryTree(curr.Right, path)
+	if t.Left != nil {
+		t.Left.inWalkBinaryTree(path)
+	}
+	*path = append(*path, t.Value)
+	if t.Right != nil {
+		t.Right.inWalkBinaryTree(path)
+	}
 
 	return path
 }
