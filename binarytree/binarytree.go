@@ -12,6 +12,22 @@ type BinaryNode[T cmp.Ordered] struct {
 	Right *BinaryNode[T]
 }
 
+func New[T cmp.Ordered]() *BinaryNode[T] {
+	return &BinaryNode[T]{}
+}
+
+func FromValue[T cmp.Ordered](value T) *BinaryNode[T] {
+	return &BinaryNode[T]{Value: value}
+}
+
+func From[T cmp.Ordered](value T, left *BinaryNode[T], right *BinaryNode[T]) *BinaryNode[T] {
+	return &BinaryNode[T]{
+		Value: value,
+		Left: left,
+		Right: right,
+	}
+}
+
 func (t *BinaryNode[T]) rawPrint(i int) {
 	var opening, closing string
 	switch i % 4 {
