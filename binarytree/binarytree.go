@@ -23,12 +23,22 @@ func FromValue[T cmp.Ordered](value T) *BinaryNode[T] {
 	return &BinaryNode[T]{Value: value}
 }
 
-func From[T cmp.Ordered](value T, left *BinaryNode[T], right *BinaryNode[T]) *BinaryNode[T] {
-	return &BinaryNode[T]{
+func From[T cmp.Ordered](value T, left *BinaryNode[T], right *BinaryNode[T]) (node *BinaryNode[T]) {
+
+	node = &BinaryNode[T]{
 		Value: value,
-		Left: left,
-		Right: right,
 	}
+
+	if left != nil {
+		left.Parent = node
+	}
+	if right != nil {
+		right.Parent = node
+	}
+
+	node.Left, node.Right = left, right
+
+	return
 }
 
 func (t *BinaryNode[T]) rawPrint(i int) {

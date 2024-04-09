@@ -1,6 +1,7 @@
 package binarytree
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -110,19 +111,33 @@ func TestFromValue(t *testing.T) {
 }
 
 func TestFrom(t *testing.T) {
-	root := &BinaryNode[int]{
+	tree0 := &BinaryNode[int]{
 		Value: 1,
 		Parent: nil,
 		Left: nil,
 		Right: nil,
 	}
 
-	root.Left = &BinaryNode[int]{
+	tree0.Left = &BinaryNode[int]{
 		Value: 2,
-		Parent: root,
+		Parent: tree0,
 	}
-	root.Right = &BinaryNode[int]{
+	tree0.Right = &BinaryNode[int]{
 		Value: 3,
-		Parent: root,
+		Parent: tree0,
+	}
+
+	tree1 := From(1,
+		From(2, nil, nil),
+		From(3, nil, nil),
+	)
+
+	tree0.Debug()
+	tree1.Debug()
+
+	fmt.Print("\n\n\n\n\n\n")
+
+	if !Equal(tree0, tree1) {
+		t.Fatalf("expected trees to be equal")
 	}
 }
