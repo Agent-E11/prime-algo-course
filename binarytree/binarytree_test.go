@@ -1,7 +1,6 @@
 package binarytree
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -11,28 +10,28 @@ func TestEqual(t *testing.T) {
 	}
 
 	if !Equal(
-		&BinaryNode[int]{},
-		&BinaryNode[int]{},
+		&Node[int]{},
+		&Node[int]{},
 	) {
 		t.Fatalf("expected zero values to be equal")
 	}
 
 	if !Equal(
-		&BinaryNode[int]{
+		&Node[int]{
 			Value: 0,
-			Left: &BinaryNode[int]{
+			Left: &Node[int]{
 				Value: 1,
 			},
-			Right: &BinaryNode[int]{
+			Right: &Node[int]{
 				Value: 2,
 			},
 		},
-		&BinaryNode[int]{
+		&Node[int]{
 			Value: 0,
-			Left: &BinaryNode[int]{
+			Left: &Node[int]{
 				Value: 1,
 			},
-			Right: &BinaryNode[int]{
+			Right: &Node[int]{
 				Value: 2,
 			},
 		},
@@ -40,18 +39,18 @@ func TestEqual(t *testing.T) {
 		t.Fatalf("expected trees to be equal")
 	}
 
-	tree0 := &BinaryNode[int]{
+	tree0 := &Node[int]{
 		Value: 0,
 	}
-	tree0.Left = &BinaryNode[int]{
+	tree0.Left = &Node[int]{
 		Value: 1,
 		Parent: tree0,
 	}
 
-	tree1 := &BinaryNode[int]{
+	tree1 := &Node[int]{
 		Value: 0,
 	}
-	tree1.Left = &BinaryNode[int]{
+	tree1.Left = &Node[int]{
 		Value: 1,
 		Parent: tree1,
 	}
@@ -66,7 +65,7 @@ func TestEqual(t *testing.T) {
 		t.Fatalf("expected trees with one nil parent to be not equal")
 	}
 
-	tree0.Left.Parent = &BinaryNode[int]{
+	tree0.Left.Parent = &Node[int]{
 		Value: 2,
 	}
 
@@ -74,7 +73,7 @@ func TestEqual(t *testing.T) {
 		t.Fatalf("expected trees with one nil parent and one malformed parent to be not equal")
 	}
 
-	tree1.Left.Parent = &BinaryNode[int]{
+	tree1.Left.Parent = &Node[int]{
 		Value: 3,
 	}
 
@@ -87,42 +86,42 @@ func TestEqual(t *testing.T) {
 }
 
 func TestNew(t *testing.T) {
-	if !Equal(New[int](), &BinaryNode[int]{}) {
-		t.Fatalf("expected %v, got %v", &BinaryNode[int]{}, New[int]())
+	if !Equal(New[int](), &Node[int]{}) {
+		t.Fatalf("expected %v, got %v", &Node[int]{}, New[int]())
 	}
-	if !Equal(New[string](), &BinaryNode[string]{}) {
-		t.Fatalf("expected %v, got %v", &BinaryNode[string]{}, New[string]())
+	if !Equal(New[string](), &Node[string]{}) {
+		t.Fatalf("expected %v, got %v", &Node[string]{}, New[string]())
 	}
-	if !Equal(New[float32](), &BinaryNode[float32]{}) {
-		t.Fatalf("expected %v, got %v", &BinaryNode[float32]{}, New[float32]())
+	if !Equal(New[float32](), &Node[float32]{}) {
+		t.Fatalf("expected %v, got %v", &Node[float32]{}, New[float32]())
 	}
 }
 
 func TestFromValue(t *testing.T) {
-	if !Equal(FromValue(1), &BinaryNode[int]{Value: 1}) {
-		t.Fatalf("expected %v, got %v", &BinaryNode[int]{Value:1}, FromValue(1))
+	if !Equal(FromValue(1), &Node[int]{Value: 1}) {
+		t.Fatalf("expected %v, got %v", &Node[int]{Value:1}, FromValue(1))
 	}
-	if !Equal(FromValue("thing"), &BinaryNode[string]{Value: "thing"}) {
-		t.Fatalf("expected %v, got %v", &BinaryNode[string]{Value:"thing"}, FromValue("thing"))
+	if !Equal(FromValue("thing"), &Node[string]{Value: "thing"}) {
+		t.Fatalf("expected %v, got %v", &Node[string]{Value:"thing"}, FromValue("thing"))
 	}
-	if !Equal(FromValue[float32](3.14), &BinaryNode[float32]{Value: 3.14}) {
-		t.Fatalf("expected %v, got %v", &BinaryNode[float32]{Value:3.14}, FromValue(3.14))
+	if !Equal(FromValue[float32](3.14), &Node[float32]{Value: 3.14}) {
+		t.Fatalf("expected %v, got %v", &Node[float32]{Value:3.14}, FromValue(3.14))
 	}
 }
 
 func TestFrom(t *testing.T) {
-	tree0 := &BinaryNode[int]{
+	tree0 := &Node[int]{
 		Value: 1,
 		Parent: nil,
 		Left: nil,
 		Right: nil,
 	}
 
-	tree0.Left = &BinaryNode[int]{
+	tree0.Left = &Node[int]{
 		Value: 2,
 		Parent: tree0,
 	}
-	tree0.Right = &BinaryNode[int]{
+	tree0.Right = &Node[int]{
 		Value: 3,
 		Parent: tree0,
 	}
@@ -132,12 +131,7 @@ func TestFrom(t *testing.T) {
 		From(3, nil, nil),
 	)
 
-	tree0.Debug()
-	tree1.Debug()
-
-	fmt.Print("\n\n\n\n\n\n")
-
-	if !Equal(tree0, tree1) {
+	if !Equal[int](tree0, tree1) {
 		t.Fatalf("expected trees to be equal")
 	}
 }

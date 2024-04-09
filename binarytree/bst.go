@@ -2,7 +2,7 @@ package binarytree
 
 import "slices"
 
-func (t *BinaryNode[T]) isBSTRange(mn T, mx T, ignoreMn bool, ignoreMx bool) bool {
+func (t *Node[T]) isBSTRange(mn T, mx T, ignoreMn bool, ignoreMx bool) bool {
 
 	if t.Value > mx && !ignoreMx {
 		return false
@@ -21,6 +21,6 @@ func (t *BinaryNode[T]) isBSTRange(mn T, mx T, ignoreMn bool, ignoreMx bool) boo
 	return true
 }
 
-func (t *BinaryNode[T]) IsBinarySearchTree() bool {
+func (t *Node[T]) IsBinarySearchTree() bool {
 	return slices.IsSorted(t.InOrderSearch())
 }

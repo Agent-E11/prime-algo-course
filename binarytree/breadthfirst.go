@@ -1,7 +1,7 @@
 package binarytree
 
-func BreadthFirstSearch(head *BinaryNode[int], needle int) bool {
-	q := []*BinaryNode[int]{head}
+func BreadthFirstSearch(head *Node[int], needle int) bool {
+	q := []*Node[int]{head}
 
 	for len(q) > 0 {
 		// Get first element, and remove it from the queue

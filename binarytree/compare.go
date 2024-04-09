@@ -2,7 +2,7 @@ package binarytree
 
 import "cmp"
 
-// Check if two BinaryNode's are equal. This function will check if the two
+// Check if two Node's are equal. This function will check if the two
 // trees coresponding to the nodes have the same values, and the same
 // structure.
 //
@@ -21,7 +21,7 @@ import "cmp"
 // y.Parent = z
 //
 // b can still be equal to y, because they are both malformed.
-func Equal[T cmp.Ordered](a *BinaryNode[T], b *BinaryNode[T]) bool {
+func Equal[T cmp.Ordered](a *Node[T], b *Node[T]) bool {
 	if a == nil && b == nil {
 		return true
 	}

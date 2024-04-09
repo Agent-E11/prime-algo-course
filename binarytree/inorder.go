@@ -1,10 +1,10 @@
 package binarytree
 
-func (t *BinaryNode[T]) InOrderSearch() []T {
+func (t *Node[T]) InOrderSearch() []T {
 	return *t.inWalkBinaryTree(&[]T{})
 }
 
-func (t *BinaryNode[T]) inWalkBinaryTree(path *[]T) *[]T {
+func (t *Node[T]) inWalkBinaryTree(path *[]T) *[]T {
 	if t == nil {
 		return path
 	}

@@ -1,11 +1,11 @@
 // Binary Tree
 package binarytree
 
-func PreOrderSearch(head BinaryNode[int]) []int {
+func PreOrderSearch(head Node[int]) []int {
 	return *preWalkBinaryTree(&head, &[]int{})
 }
 
-func preWalkBinaryTree(curr *BinaryNode[int], path *[]int) *[]int {
+func preWalkBinaryTree(curr *Node[int], path *[]int) *[]int {
 	if curr == nil {
 		return path
 	}

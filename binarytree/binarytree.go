@@ -6,26 +6,24 @@ import (
 	"strings"
 )
 
-// TODO: Rename to "Node"
-
-type BinaryNode[T cmp.Ordered] struct {
+type Node[T cmp.Ordered] struct {
 	Value T
-	Parent *BinaryNode[T]
-	Left *BinaryNode[T]
-	Right *BinaryNode[T]
+	Parent *Node[T]
+	Left *Node[T]
+	Right *Node[T]
 }
 
-func New[T cmp.Ordered]() *BinaryNode[T] {
-	return &BinaryNode[T]{}
+func New[T cmp.Ordered]() *Node[T] {
+	return &Node[T]{}
 }
 
-func FromValue[T cmp.Ordered](value T) *BinaryNode[T] {
-	return &BinaryNode[T]{Value: value}
+func FromValue[T cmp.Ordered](value T) *Node[T] {
+	return &Node[T]{Value: value}
 }
 
-func From[T cmp.Ordered](value T, left *BinaryNode[T], right *BinaryNode[T]) (node *BinaryNode[T]) {
+func From[T cmp.Ordered](value T, left *Node[T], right *Node[T]) (node *Node[T]) {
 
-	node = &BinaryNode[T]{
+	node = &Node[T]{
 		Value: value,
 	}
 
@@ -41,7 +39,7 @@ func From[T cmp.Ordered](value T, left *BinaryNode[T], right *BinaryNode[T]) (no
 	return
 }
 
-func (t *BinaryNode[T]) rawPrint(i int) {
+func (t *Node[T]) rawPrint(i int) {
 	var opening, closing string
 	switch i % 4 {
 	case 0:
@@ -78,12 +76,12 @@ func (t *BinaryNode[T]) rawPrint(i int) {
 	fmt.Printf("%v", closing)
 }
 
-func (t *BinaryNode[T]) Print() {
+func (t *Node[T]) Print() {
 	t.rawPrint(0)
 	fmt.Println()
 }
 
-func (t *BinaryNode[T]) rawDebug(i int) {
+func (t *Node[T]) rawDebug(i int) {
 	indent := strings.Repeat("  ", i)
 
 	fmt.Printf("%v (%p) {\n", t.Value, t)
@@ -118,7 +116,7 @@ func (t *BinaryNode[T]) rawDebug(i int) {
 	if i > 0 { fmt.Print(",") }
 }
 
-func (t *BinaryNode[T]) Debug() {
+func (t *Node[T]) Debug() {
 	t.rawDebug(0)
 	fmt.Println()
 }

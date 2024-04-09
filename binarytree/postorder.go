@@ -1,10 +1,10 @@
 package binarytree
 
-func PostOrderSearch(head BinaryNode[int]) []int {
+func PostOrderSearch(head Node[int]) []int {
 	return *postWalkBinaryTree(&head, &[]int{})
 }
 
-func postWalkBinaryTree(curr *BinaryNode[int], path *[]int) *[]int {
+func postWalkBinaryTree(curr *Node[int], path *[]int) *[]int {
 	if curr == nil {
 		return path
 	}
