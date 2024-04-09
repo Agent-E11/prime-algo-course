@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	bt "github.com/agent-e11/prime-algo-course/binarytree"
 )
 
@@ -20,8 +18,5 @@ func main() {
 		),
 	)
 
-	n.Print()
-
-	fmt.Println(n.InOrderSearch())
-	fmt.Println(n.IsBinarySearchTree())
+	n.Debug()
 }

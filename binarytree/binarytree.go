@@ -3,6 +3,7 @@ package binarytree
 import (
 	"cmp"
 	"fmt"
+	"strings"
 )
 
 // TODO: Rename to "Node"
@@ -69,5 +70,45 @@ func (t *BinaryNode[T]) rawPrint(i int) {
 
 func (t *BinaryNode[T]) Print() {
 	t.rawPrint(0)
+	fmt.Println()
+}
+
+func (t *BinaryNode[T]) rawDebug(i int) {
+	indent := strings.Repeat("  ", i)
+
+	fmt.Printf("%v (%p) {\n", t.Value, t)
+
+	fmt.Print(indent + "  ", "Parent: ")
+
+	if t.Parent != nil {
+		fmt.Printf("%p,\n", t.Parent)
+	} else {
+		fmt.Print("nil,\n")
+	}
+
+	fmt.Print(indent + "  ", "Left: ")
+
+	if t.Left != nil {
+		t.Left.rawDebug(i + 1)
+		fmt.Println()
+	} else {
+		fmt.Print("nil,\n")
+	}
+
+	fmt.Print(indent + "  ", "Right: ")
+
+	if t.Right != nil {
+		t.Right.rawDebug(i + 1)
+		fmt.Println()
+	} else {
+		fmt.Print("nil,\n")
+	}
+
+	fmt.Printf(indent + "}")
+	if i > 0 { fmt.Print(",") }
+}
+
+func (t *BinaryNode[T]) Debug() {
+	t.rawDebug(0)
 	fmt.Println()
 }

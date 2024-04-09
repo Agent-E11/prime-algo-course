@@ -98,7 +98,15 @@ func TestNew(t *testing.T) {
 }
 
 func TestFromValue(t *testing.T) {
-	
+	if !Equal(FromValue(1), &BinaryNode[int]{Value: 1}) {
+		t.Fatalf("expected %v, got %v", &BinaryNode[int]{Value:1}, FromValue(1))
+	}
+	if !Equal(FromValue("thing"), &BinaryNode[string]{Value: "thing"}) {
+		t.Fatalf("expected %v, got %v", &BinaryNode[string]{Value:"thing"}, FromValue("thing"))
+	}
+	if !Equal(FromValue[float32](3.14), &BinaryNode[float32]{Value: 3.14}) {
+		t.Fatalf("expected %v, got %v", &BinaryNode[float32]{Value:3.14}, FromValue(3.14))
+	}
 }
 
 func TestFrom(t *testing.T) {
