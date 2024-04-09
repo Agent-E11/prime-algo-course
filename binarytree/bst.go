@@ -24,3 +24,29 @@ func (t *Node[T]) isBSTRange(mn T, mx T, ignoreMn bool, ignoreMx bool) bool {
 func (t *Node[T]) IsBinarySearchTree() bool {
 	return slices.IsSorted(t.InOrderSearch())
 }
+
+func (t *Node[T]) BSTInsert(value T) {
+	curr := t
+
+	for {
+		if curr.Value < value {
+			if curr.Right == nil {
+				curr.Right = &Node[T]{
+					Value: value,
+					Parent: curr,
+				}
+				return
+			}
+			curr = curr.Right
+		} else {
+			if curr.Left == nil {
+				curr.Left = &Node[T]{
+					Value: value,
+					Parent: curr,
+				}
+				return
+			}
+			curr = curr.Left
+		}
+	}
+}

@@ -131,7 +131,38 @@ func TestFrom(t *testing.T) {
 		From(3, nil, nil),
 	)
 
-	if !Equal[int](tree0, tree1) {
+	if !Equal(tree0, tree1) {
 		t.Fatalf("expected trees to be equal")
+	}
+}
+
+// This only makes sure that the tree is still a BST after the insert
+func TestBSTInsert(t *testing.T) {
+	tree := From(
+		5,
+		FromValue(3),
+		FromValue(7),
+	)
+
+	if !tree.IsBinarySearchTree() {
+		t.Fatal("the original test is flawed")
+	}
+
+	tree.BSTInsert(7)
+	tree.BSTInsert(9)
+	tree.BSTInsert(1)
+	tree.BSTInsert(5)
+	tree.BSTInsert(6)
+	tree.BSTInsert(8)
+	tree.BSTInsert(2)
+	tree.BSTInsert(1)
+	tree.BSTInsert(3)
+	tree.BSTInsert(5)
+	tree.BSTInsert(7)
+	tree.BSTInsert(9)
+	tree.BSTInsert(8)
+
+	if !tree.IsBinarySearchTree() {
+		t.Fatal("expected tree to stay a BST after BSTInsert")
 	}
 }
