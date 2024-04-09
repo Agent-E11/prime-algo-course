@@ -5,6 +5,8 @@ import (
 	"fmt"
 )
 
+// TODO: Rename to "Node"
+
 type BinaryNode[T cmp.Ordered] struct {
 	Value T
 	Parent *BinaryNode[T]
