@@ -3,29 +3,18 @@ package main
 import (
 	"fmt"
 
-	bt "github.com/agent-e11/prime-algo-course/binarytree"
+	"github.com/agent-e11/prime-algo-course/heap"
 )
 
 func main() {
-	n := bt.From(4,
-		bt.From(
-			2,
-			bt.FromValue(1),
-			bt.FromValue(3),
-		),
-		bt.From(
-			6,
-			bt.FromValue(5),
-			bt.FromValue(7),
-		),
-	)
+	h := heap.New[int]()
 
-	n.Debug()
+	for _, i := range []int{8, 2, 3, 7, 4, 0, 2, 9, 7, 5, 4, 0, 3, 4, 8, 0, 6, 4, 9, 2, 3, 4, 9, 2, 3, 4, 8, 0, 1, 0, 1} {
+		h.Insert(i)
+		h.Print()
+	}
 
-	n.BSTInsert(8)
-	n.BSTInsert(3)
+	fmt.Println(h.Delete())
 
-	n.Debug()
-
-	fmt.Printf("n.InOrderSearch(): %v\n", n.InOrderSearch())
+	h.Print()
 }

@@ -50,3 +50,26 @@ func (t *Node[T]) BSTInsert(value T) {
 		}
 	}
 }
+
+func (t *Node[T]) BSTFind(needle T) bool {
+	curr := t
+	for {
+		if curr == nil {
+			return false
+		}
+
+		if curr.Value == needle {
+			return true
+		}
+
+		if curr.Value < needle {
+			curr = curr.Right
+		} else {
+			curr = curr.Left
+		}
+	}
+}
+
+// TODO: https://frontendmasters.com/courses/algorithms/depth-first-delete
+// Also, rename to BSTRemove
+func (t *Node[T]) bSTRemove(value T) {}
