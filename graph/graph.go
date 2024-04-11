@@ -86,3 +86,62 @@ func PrintWAM(graph WAM) {
 		}
 	}
 }
+
+// Weighted Adjacency List
+type WAL = [][]GraphEdge
+
+type GraphEdge struct {
+	To int
+	Weight int
+}
+
+func walkDFS(graph WAL, curr int, needle int, seen *[]bool, path *[]int) bool {
+
+	if curr >= len(*seen) {
+		diff := curr - len(*seen) + 1
+		*seen = append(*seen, make([]bool, diff)...)
+	}
+
+	if (*seen)[curr] {
+		return false
+	}
+
+	(*seen)[curr] = true
+
+	*path = append(*path, curr)
+
+	if curr == needle {
+		return true
+	}
+
+	list := graph[curr]
+
+	for i := 0; i < len(list); i++ {
+		edge := list[i]
+
+		if walkDFS(graph, edge.To, needle, seen, path) {
+			return true
+		}
+	}
+
+	*path = (*path)[:len(*path)-1]
+
+	return false
+}
+
+func DFSearch(graph WAL, source int, needle int) []int {
+	seen := make([]bool, len(graph))
+	path := []int{}
+
+	walkDFS(graph, source, needle, &seen, &path)
+
+	return path
+}
+
+func PrintWAL(graph WAL) {
+	for self, edges := range graph {
+		for _, edge := range edges {
+			fmt.Printf("%d --%d-> %d\n", self, edge.Weight, edge.To)
+		}
+	}
+}

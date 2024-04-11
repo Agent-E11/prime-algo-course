@@ -7,27 +7,23 @@ import (
 )
 
 func main() {
-	g := graph.NewWAM(5)
-
-	g[3][1] = 1
-	g[1][2] = 2
-	g[2][4] = 3
-	g[0][4] = 4
-
-	graph.PrintWAM(g)
-
-	path := graph.BFSearch(g, 3, 4)
-
-	fmt.Printf("path: %v\n", path)
-
-	fmt.Println("Total weight")
-
-	curr := path[0]
-	weight := 0
-	for i := 1; i < len(path); i++ {
-		weight += g[curr][path[i]]
-		curr = path[i]
+	g := graph.WAL{
+		[]graph.GraphEdge{ // 0
+			{ To: 2, Weight: 5 },
+			{ To: 1, Weight: 1 },
+		},
+		[]graph.GraphEdge{ // 1
+			{ To: 2, Weight: 7 },
+			{ To: 3, Weight: 6 },
+		},
+		[]graph.GraphEdge{ // 2
+			{ To: 4, Weight: 1 },
+		},
+		[]graph.GraphEdge{ // 3
+			{ To: 2, Weight: 1 },
+		},
 	}
 
-	fmt.Printf("weight: %v\n", weight)
+	path := graph.DFSearch(g, 0, 4)
+	fmt.Printf("path: %v\n", path)
 }
