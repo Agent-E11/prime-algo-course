@@ -2,6 +2,7 @@ package graph
 
 import (
 	"fmt"
+	"math"
 	"slices"
 )
 
@@ -134,6 +135,79 @@ func DFSearch(graph WAL, source int, needle int) []int {
 	path := []int{}
 
 	walkDFS(graph, source, needle, &seen, &path)
+
+	return path
+}
+
+func hasUnvisited(seen []bool, dists []int) bool {
+	for i, s := range seen {
+		if !s && dists[i] < math.MaxInt {
+			return true
+		}
+	}
+	return false
+}
+
+func getLowestUnvisited(seen []bool, dists []int) int {
+	idx := -1
+	lowestDistance := math.MaxInt
+
+	for i := 0; i < len(seen); i++ {
+		if seen[i] { continue }
+
+		if lowestDistance > dists[i] {
+			lowestDistance = dists[i]
+			idx = i
+		}
+	}
+
+	return idx
+}
+
+func DijkstraList(source int, sink int, arr WAL) []int {
+	seen := make([]bool, len(arr))
+	prev := make([]int, len(arr))
+	for i := range len(prev) {
+		prev[i] = -1
+	}
+	dists := make([]int, len(arr))
+	for i := range len(dists) {
+		dists[i] = math.MaxInt
+	}
+
+	dists[source] = 0
+
+	for hasUnvisited(seen, dists) {
+		curr := getLowestUnvisited(seen, dists)
+		seen[curr] = true
+
+		adjs := arr[curr]
+		for i := 0; i < len(adjs); i++ {
+			edge := adjs[i]
+			if seen[edge.To] {
+				continue
+			}
+
+			dist := dists[curr] + edge.Weight
+
+			if dist < dists[edge.To] {
+				dists[edge.To] = dist
+				prev[edge.To] = curr
+			}
+		}
+	}
+
+	path := []int{}
+	curr := sink
+
+	for prev[curr] != -1 {
+		path = append(path, curr)
+
+		curr = prev[curr]
+	}
+
+	path = append(path, source)
+	slices.Reverse(path)
 
 	return path
 }
