@@ -12,7 +12,7 @@ var dirs [4][2]int = [4][2]int{
 	{ 0, -1},
 }
 
-func walk(maze []string, wall string, curr Point, end Point, seen [][]bool, path *[]Point) bool {
+func walk(maze []string, wall rune, curr Point, end Point, seen [][]bool, path *[]Point) bool {
 	// Base cases
 
 	// Current point is off the map
@@ -23,7 +23,7 @@ func walk(maze []string, wall string, curr Point, end Point, seen [][]bool, path
 	}
 
 	// Current point is a wall
-	if maze[curr.Y][curr.X] == wall[0] {
+	if rune(maze[curr.Y][curr.X]) == wall {
 		return false
 	}
 
@@ -62,7 +62,7 @@ func walk(maze []string, wall string, curr Point, end Point, seen [][]bool, path
 	return false
 }
 
-func Solve(maze []string, wall string, start Point, end Point) []Point {
+func Solve(maze []string, wall rune, start Point, end Point) []Point {
 	seen := make([][]bool, len(maze))
 	for i := 0; i < len(maze); i++ {
 		seen[i] = make([]bool, len(maze[0]))
